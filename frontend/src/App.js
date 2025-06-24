@@ -1,24 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from "react";
+import GraphView from "./components/GraphView";
 
 function App() {
-  const [data, setData] = useState({ original: [], sorted: [] });
+    const [graphData, setGraphData] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/sort")
-        .then((res) => res.json())
-        .then((result) => setData(result));
-  }, []);
+    // Simulate getting graph data from Flask
+    useEffect(() => {
+        // You can later replace this with a real fetch from Flask
+        const exampleGraph = [
+            { data: { id: 'a', label: 'Node A' } },
+            { data: { id: 'b', label: 'Node B' } },
+            { data: { id: 'c', label: 'Node C' } },
+            { data: { source: 'a', target: 'b' } },
+            { data: { source: 'b', target: 'c' } },
+        ];
+        setGraphData(exampleGraph);
+    }, []);
 
-  return (
-      <div style={{ padding: 20 }}>
-        <h1>Sorting Visualizer</h1>
-        <p><strong>Original:</strong> {data.original.join(", ")}</p>
-        <p><strong>Sorted:</strong> {data.sorted.join(", ")}</p>
-      </div>
-  );
+    return (
+        <div style={{ padding: 20 }}>
+            <h1>Graph Visualizer</h1>
+            <GraphView elements={graphData} />
+        </div>
+    );
 }
 
 export default App;
+
 
