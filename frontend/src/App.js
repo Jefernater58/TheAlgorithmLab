@@ -1,38 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useState } from "react";
-import GraphView from "./components/GraphView";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import Pathfinding from "./pages/Pathfinding";
 
-function App() {
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/hello`)
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-    }, []);
-
-    const [graphData, setGraphData] = useState([]);
-
-    // Simulate getting graph data from Flask
-    useEffect(() => {
-        // You can later replace this with a real fetch from Flask
-        const exampleGraph = [
-            { data: { id: 'a', label: 'Node A' } },
-            { data: { id: 'b', label: 'Node B' } },
-            { data: { id: 'c', label: 'Node C' } },
-            { data: { source: 'a', target: 'b' } },
-            { data: { source: 'b', target: 'c' } },
-        ];
-        setGraphData(exampleGraph);
-    }, []);
-
+export default function App() {
     return (
-        <div style={{ padding: 20 }}>
-            <h1>Graph Visualizer</h1>
-            <GraphView elements={graphData} />
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Navigate to="/home" replace />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/pathfinding" element={<Pathfinding />} />
+                {/* Add more pages here */}
+            </Routes>
+        </Router>
     );
 }
-
-export default App;
 
 
