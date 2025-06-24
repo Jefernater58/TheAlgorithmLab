@@ -5,11 +5,9 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/api/sort")
-def sort_data():
-    data = [5, 3, 8, 1, 2]
-    sorted_data = sorted(data)
-    return jsonify({"original": data, "sorted": sorted_data})
+@app.route("/api/hello")
+def hello():
+    return jsonify({"message": "Hello from Flask on Render!"})
 
 
 if __name__ == "__main__":
