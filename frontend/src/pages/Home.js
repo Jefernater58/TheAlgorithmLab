@@ -1,3 +1,9 @@
+import React from "react";
+import Navbar from "../components/Navbar";
+import "./Home.css";
+
 export default function Home() {
-    return <h1>Welcome to The Algorithm Lab 🧪</h1>;
+    return <div id="container">
+        <Navbar />
+    </div>;
 }

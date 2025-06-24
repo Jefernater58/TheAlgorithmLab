@@ -9,7 +9,6 @@ export default function App() {
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/pathfinding" element={<Pathfinding />} />
-                {/* Add more pages here */}
             </Routes>
         </Router>
     );
