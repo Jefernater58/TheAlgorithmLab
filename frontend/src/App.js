@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function App() {
     useEffect(() => {
-        fetch("https://your-flask-app.onrender.com/api/hello")
+        fetch(`${process.env.REACT_APP_API_URL}/api/hello`)
             .then((res) => res.json())
             .then((data) => console.log(data));
     }, []);
