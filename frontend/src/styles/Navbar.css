@@ -1,0 +1,39 @@
+#Navbar-navbar {
+    width: 100%;
+    font-family: 'Consolas', monospace;
+    height: 50px;
+    background: #dce0e8;
+}
+
+#Navbar-list {
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#Navbar-list li {
+    height: 100%;
+    flex: none;
+}
+
+#Navbar-list li:hover {
+    background: #ccd0da;
+}
+
+.Navbar-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 20px;
+    text-decoration: none;
+    color: #4c4f69;
+}
+
+.Navbar-link.active {
+    background-color: #7c7f9356;
+    font-weight: bold;
+}
