@@ -11,7 +11,7 @@ export default function Home() {
             <div className="Home-hero">
                 <h1>The Algorithm Lab</h1>
                 <hr className="Home-divider"/>
-                <img className="Home-badge" src="https://hackatime-badge.hackclub.com/U091J0C0QSJ/the-algorithm-lab"
+                <img className="Home-badge" src="https://hackatime-badge.hackclub.com/U091J0C0QSJ/TheAlgorithmLab"
                      alt="Hackatime Badge"/> <img className="Home-badge"
                                                   src="https://img.shields.io/github/created-at/Jefernater58/TheAlgorithmLab"
                                                   alt="Created At Badge"/> <img className="Home-badge"
