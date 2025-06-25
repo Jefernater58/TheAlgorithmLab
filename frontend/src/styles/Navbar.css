@@ -1,26 +1,23 @@
 #Navbar-navbar {
     width: 100%;
+    text-align:center;
     font-family: 'Consolas', monospace;
     height: 50px;
-    background: #dce0e8;
 }
 
 #Navbar-list {
-    width: 100%;
+    width: fit-content;
     height: 100%;
+    margin:auto;
     list-style-type: none;
-    margin: 0;
     padding: 0;
     display: flex;
 }
 
 #Navbar-list li {
+    width: 150px;
     height: 100%;
     flex: none;
-}
-
-#Navbar-list li:hover {
-    background: #ccd0da;
 }
 
 .Navbar-link {
@@ -33,7 +30,16 @@
     color: #4c4f69;
 }
 
-.Navbar-link.active {
-    background-color: #7c7f9356;
+.Navbar-link:hover {
     font-weight: bold;
+}
+
+.Navbar-link.active {
+    font-weight: bold;
+}
+
+.Navbar-divider {
+    border: 0;
+    border-top: 1px solid #8c8fa1C0;
+    margin: 0;
 }

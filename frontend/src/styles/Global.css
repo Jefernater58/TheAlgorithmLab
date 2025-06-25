@@ -1,8 +1,21 @@
-body, .Global-container {
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #fe640b10, #eff1f5, #7287fd40);
+}
+
+.Global-container {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "SEgoe UI", sans-serif;
+}
 
-    background: #eff1f5;
+.Global-mainbody {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 20px;
+    height: calc(100vh - 50px);
 }

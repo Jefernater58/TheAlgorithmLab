@@ -11,6 +11,7 @@ export default function Navbar() {
             <li><NavLink className="Navbar-link" to="/searching">Searching</NavLink></li>
             <li><NavLink className="Navbar-link" to="/extras">Extras ;)</NavLink></li>
         </ul>
+        <hr className="Navbar-divider" />
     </nav>;
 }
 

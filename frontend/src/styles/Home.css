@@ -1,0 +1,14 @@
+.Home-hero {
+    width: 700px;
+    margin: auto;
+    color: #4c4f69;
+}
+
+.Home-badge {
+    padding: 16px 12px 0 0;
+}
+
+.Home-divider {
+    border: 0;
+    border-top: 1px solid #8c8fa190;
+}
