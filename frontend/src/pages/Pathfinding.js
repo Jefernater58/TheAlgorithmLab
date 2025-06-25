@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import "../styles/Pathfinding.css";
 import "../styles/Global.css";
 import {Play, Undo2} from "lucide-react";
+import PathfindingGraph from "../components/PathfindingGraph"
 
 export default function Pathfinding() {
     return <div className="Global-container">
@@ -39,6 +40,7 @@ export default function Pathfinding() {
             </div>
             <div className="Pathfinding-graph">
                 <h2>Graph</h2>
+                <PathfindingGraph />
             </div>
         </div>
     </div>;

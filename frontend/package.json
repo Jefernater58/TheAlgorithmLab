@@ -8,6 +8,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
     "cytoscape": "^3.32.0",
+    "cytoscape-dagre": "^2.5.0",
     "lucide-react": "^0.523.0",
     "react": "^19.1.0",
     "react-cytoscapejs": "^2.0.0",

@@ -1,22 +1,26 @@
-import CytoscapeComponent from "react-cytoscapejs";
+import CytoscapeComponent from "react-cytoscapejs"
+import cytoscape from "cytoscape";
+import dagre from "cytoscape-dagre";
+import {useEffect, useState} from "react";
 
-export default function DemoGraph() {
-    const elements = [
-        {data: {id: "A", label: "A"}},
-        {data: {id: "B", label: "B"}},
-        {data: {id: "C", label: "C"}},
-        {data: {id: "D", label: "D"}},
-        {data: {id: "E", label: "E"}},
-        {data: {id: "F", label: "F"}},
+cytoscape.use(dagre);
 
-        {data: {source: "A", target: "B",}},
-        {data: {source: "A", target: "C",}},
-        {data: {source: "B", target: "D",}},
-        {data: {source: "C", target: "D",}},
-        {data: {source: "D", target: "E",}},
-        {data: {source: "E", target: "F",}},
-        {data: {source: "F", target: "A",}}
-    ];
+export default function PathfindingGraph() {
+    const layout = {
+        name: "breadthfirst",
+        directed: false,
+        padding: 10,
+        spacingFactor: 1.75,
+        animate: true,
+        roots: ["A"]
+    };
+
+    const [graphElements, setGraphElements] = useState([]);
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=20`)
+            .then((res) => res.json())
+            .then((data) => setGraphElements(data));
+    })
 
     const stylesheet = [
         {
@@ -83,11 +87,11 @@ export default function DemoGraph() {
     ];
 
     return (
-        <div style={{width: "600px", height: "400px", margin: "auto"}}>
+        <div style={{width: "100%", height: "calc(100% - 70px)", margin: "auto"}}>
             <CytoscapeComponent
-                elements={elements}
+                elements={graphElements}
                 style={{width: "100%", height: "100%", border: "1px solid #4c4f69", background: "#eff1f588"}}
-                layout={{name: "breadthfirst", roots: ["A"]}}
+                layout={layout}
                 stylesheet={stylesheet}
             />
         </div>
