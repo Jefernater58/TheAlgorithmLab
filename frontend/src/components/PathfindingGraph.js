@@ -17,7 +17,7 @@ export default function PathfindingGraph() {
 
     const [graphElements, setGraphElements] = useState([]);
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=20`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=20&edges=20`)
             .then((res) => res.json())
             .then((data) => setGraphElements(data));
     })
