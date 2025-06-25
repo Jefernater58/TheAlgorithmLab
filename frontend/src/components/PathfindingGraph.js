@@ -1,26 +1,43 @@
 import CytoscapeComponent from "react-cytoscapejs"
 import cytoscape from "cytoscape";
 import dagre from "cytoscape-dagre";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 
 cytoscape.use(dagre);
 
 export default function PathfindingGraph() {
-    const layout = {
-        name: "breadthfirst",
-        directed: false,
-        padding: 10,
-        spacingFactor: 1.75,
-        animate: true,
-        roots: ["A"]
-    };
-
+    const cyRef = useRef(null);
     const [graphElements, setGraphElements] = useState([]);
+
+    const layout = {
+        name: "dagre",
+        nodeSep: 50,
+        edgeSep: 10,
+        rankSep: 50,
+        rankDir: "LR",
+        padding: 20
+    };
+    /*const layout = {
+        name: "breadthfirst",
+        padding: 10,
+        spacingFactor: 1.4,
+        avoidOverlap: true
+    };*/
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=20&edges=20`)
             .then((res) => res.json())
-            .then((data) => setGraphElements(data));
+            .then((data) => {
+                setGraphElements(data);
+            });
     }, []);
+
+    useEffect(() => {
+        if (cyRef.current && graphElements.length > 0) {
+            cyRef.current.json({ elements: graphElements });
+            cyRef.current.layout(layout).run();
+        }
+    }, [graphElements]);
 
     const stylesheet = [
         {
@@ -89,6 +106,7 @@ export default function PathfindingGraph() {
     return (
         <div style={{width: "100%", height: "calc(100% - 70px)", margin: "auto"}}>
             <CytoscapeComponent
+                cy={(cy) => { cyRef.current = cy }}
                 elements={graphElements}
                 style={{width: "100%", height: "100%", border: "1px solid #4c4f69", background: "#eff1f588"}}
                 layout={layout}
