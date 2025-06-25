@@ -74,11 +74,11 @@ export default function DemoGraph() {
 
         {
             selector: "node:selected",
-            style: {"border-width": 3, "border-color": "#7287fd", "cursor": "pointer"}
+            style: {"border-width": 3, "border-color": "#7287fd"}
         },
         {
             selector: "edge:selected",
-            style: {"width": 6, "cursor": "pointer"}
+            style: {"width": 6}
         }
     ];
 

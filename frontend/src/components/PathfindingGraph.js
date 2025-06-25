@@ -20,7 +20,7 @@ export default function PathfindingGraph() {
         fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=20&edges=20`)
             .then((res) => res.json())
             .then((data) => setGraphElements(data));
-    })
+    }, []);
 
     const stylesheet = [
         {
@@ -78,11 +78,11 @@ export default function PathfindingGraph() {
 
         {
             selector: "node:selected",
-            style: {"border-width": 3, "border-color": "#7287fd", "cursor": "pointer"}
+            style: {"border-width": 3, "border-color": "#7287fd"}
         },
         {
             selector: "edge:selected",
-            style: {"width": 6, "cursor": "pointer"}
+            style: {"width": 6}
         }
     ];
 

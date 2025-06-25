@@ -12,8 +12,8 @@ export default function Pathfinding() {
             <div className="Pathfinding-options">
                 <h2>Pathfinding Options</h2>
                 <label className="Global-input-label">algorithm</label>
-                <select className="Global-select" id="Algorithm">
-                    <option value="dijkstras" selected>Dijkstra's</option>
+                <select defaultValue={"dijkstras"} className="Global-select" id="Algorithm">
+                    <option value="dijkstras">Dijkstra's</option>
                     <option value="a*">A*</option>
                     <option value="breadth-first">Breadth-First Search</option>
                     <option value="depth-first">Depth-First Search</option>
@@ -29,9 +29,9 @@ export default function Pathfinding() {
                 <input type="text" className="Global-text-input" id="TargetNode" defaultValue="Z" />
                 <br/>
                 <label className="Global-input-label">replay_speed</label>
-                <select className="Global-select" id="ReplaySpeed">
+                <select defaultValue="normal" className="Global-select" id="ReplaySpeed">
                     <option value="slow">Slow</option>
-                    <option value="normal" selected>Normal</option>
+                    <option value="normal">Normal</option>
                     <option value="fast">Fast</option>
                 </select>
                 <br/>
