@@ -6,10 +6,8 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/api/hello/generate-graph", methods=["GET"])
+@app.route("/api/generate-graph", methods=["GET"])
 def generate_graph():
-
-
     return jsonify([
         {"data": {"id": "a", "label": "Node A"}},
         {"data": {"id": "b", "label": "Node B"}},

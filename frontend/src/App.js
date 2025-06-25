@@ -4,15 +4,8 @@ import Pathfinding from "./pages/Pathfinding";
 import Sorting from "./pages/Sorting";
 import Searching from "./pages/Searching";
 import Extras from "./pages/Extras";
-import {useEffect} from "react";
 
 export default function App() {
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/hello`)
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-    }, []);
-
     return (
         <Router>
             <Routes>
