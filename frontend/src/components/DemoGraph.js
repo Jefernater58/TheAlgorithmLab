@@ -25,15 +25,15 @@ export default function DemoGraph() {
         {
             selector: "node",
             style: {
-                "background-color": "#4c4f69",        // default node fill
+                "background-color": "#eff1f5",        // default node fill
                 "width": "40px",
                 "height": "40px",
                 "label": "data(label)",              // pull label from data
-                "color": "#fff",
+                "color": "#4c4f69",
                 "font-size": "14px",
                 "text-valign": "center",
                 "text-halign": "center",
-                "border-color": "#000",
+                "border-color": "#4c4f69",
                 "border-width": 1,
                 "shape": "ellipse"
             }
@@ -56,15 +56,15 @@ export default function DemoGraph() {
         {
             selector: "edge",
             style: {
-                "line-color": "#94a3b8",
-                "width": 4,
+                "line-color": "#4c4f69",
+                "width": 1,
                 "curve-style": "bezier",
                 "target-arrow-shape": "triangle",
                 "target-arrow-color": "#94a3b8",
                 "label": "data(weight)",              // show weights
                 "font-size": "16px",
                 "text-rotation": "autorotate",
-                "text-margin-y": -12,
+                "text-margin-y": -14,
                 "color": "#374151"
             }
         },

@@ -10,12 +10,87 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: "SEgoe UI", sans-serif;
+    font-family: "Segoe UI", sans-serif;
+    color: #4c4f69;
 }
 
 .Global-mainbody {
     box-sizing: border-box;
     margin: 0;
     padding: 20px;
-    height: calc(100vh - 50px);
+}
+
+.Global-input-label {
+    display: block;
+    font-family: "Consolas", monospace;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+
+.Global-button {
+    display: flex;
+    align-items: center;
+    font-family: "Consolas", monospace;
+    border-radius: 4px;
+    border: 1px solid #8c8fa1C0;
+    background: none;
+    font-size: 14px;
+    width: fit-content;
+    padding: 6px 12px;
+    color: #4c4f69;
+    height: 32px;
+}
+
+.Global-accent-button {
+    border: 1px solid #596fff;
+    background: #7287fd;
+    color: #eff1f5;
+    font-weight: bold;
+}
+
+.Global-button:hover {
+    border: 1px solid #7287fd;
+    cursor: pointer;
+}
+
+.Global-accent-button:hover {
+    background: #596fff;
+}
+
+.Global-button:focus {
+    outline: none;
+}
+
+.Global-text-input {
+    display: block;
+    font-family: "Consolas", monospace;
+    background: #ffffffe0;
+    height: 20px;
+    padding: 6px;
+    border: 1px solid #8c8fa1C0;
+}
+
+.Global-text-input:focus {
+    outline: none;
+    border: 1px solid #7287fd;
+}
+
+.Global-select {
+    padding: 6px;
+    display: block;
+    background: #ffffffe0;
+    border: 1px solid #8c8fa1C0;
+    color: #4c4f69;
+    border-radius: 4px;
+    width: fit-content;
+    height: 32px;
+}
+
+.Global-select:focus {
+    outline: none;
+    border: 1px solid #7287fd;
+}
+
+.Global-select:hover {
+    cursor: pointer;
 }

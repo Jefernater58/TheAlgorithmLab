@@ -9,7 +9,7 @@ export default function Home() {
         <Navbar/>
         <div className="Global-mainbody">
             <div className="Home-hero">
-                <h1 className="Global-page-title">The Algorithm Lab</h1>
+                <h1>The Algorithm Lab</h1>
                 <hr className="Home-divider"/>
                 <img className="Home-badge" src="https://hackatime-badge.hackclub.com/U091J0C0QSJ/the-algorithm-lab"
                      alt="Hackatime Badge"/> <img className="Home-badge"
@@ -22,7 +22,7 @@ export default function Home() {
                     how they work. You can find the different parts of the site in the navbar along the top of the
                     screen.</p>
 
-                <p><span style={{"font-weight": "bold"}}>Heads up! </span><br/>
+                <p><span style={{fontWeight: "bold"}}>Heads up! </span><br/>
                     This is my first website, so don't expect it to be perfect! If you run into any issues I would
                     really appreciate it if you could let me know! Thanks :)</p>
                 <br/>
