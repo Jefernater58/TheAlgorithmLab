@@ -53,8 +53,16 @@ body {
     cursor: pointer;
 }
 
+.Global-button:active {
+    background: #ffffffe0;
+}
+
 .Global-accent-button:hover {
     background: #596fff;
+}
+
+.Global-accent-button:active {
+    background: #4a61ea;
 }
 
 .Global-button:focus {

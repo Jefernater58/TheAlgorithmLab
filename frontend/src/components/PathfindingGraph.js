@@ -1,13 +1,36 @@
 import CytoscapeComponent from "react-cytoscapejs"
 import cytoscape from "cytoscape";
 import dagre from "cytoscape-dagre";
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState, useRef, forwardRef, useImperativeHandle} from "react";
 
 cytoscape.use(dagre);
 
-export default function PathfindingGraph() {
+export default forwardRef((props, ref) => {
     const cyRef = useRef(null);
     const [graphElements, setGraphElements] = useState([]);
+
+    useImperativeHandle(ref, () => ({
+        randomise(numNodes) {
+            fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=${numNodes}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setGraphElements(data);
+                });
+            const cy = cyRef.current;
+            cy.nodes().removeClass("start target");
+        },
+
+        setGraphStartNode(startNode) {
+            const cy = cyRef.current;
+            cy.nodes().removeClass("start");
+            cy.getElementById(startNode.toLowerCase()).addClass("start");
+        },
+        setGraphTargetNode(targetNode) {
+            const cy = cyRef.current;
+            cy.nodes().removeClass("target");
+            cy.getElementById(targetNode.toLowerCase()).addClass("target");
+        }
+    }))
 
     const layout = {
         name: "dagre",
@@ -15,17 +38,12 @@ export default function PathfindingGraph() {
         edgeSep: 10,
         rankSep: 50,
         rankDir: "LR",
-        padding: 20
+        padding: 20,
+        animate: true
     };
-    /*const layout = {
-        name: "breadthfirst",
-        padding: 10,
-        spacingFactor: 1.4,
-        avoidOverlap: true
-    };*/
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=20&edges=20`)
+        fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=26`)
             .then((res) => res.json())
             .then((data) => {
                 setGraphElements(data);
@@ -34,7 +52,7 @@ export default function PathfindingGraph() {
 
     useEffect(() => {
         if (cyRef.current && graphElements.length > 0) {
-            cyRef.current.json({ elements: graphElements });
+            cyRef.current.json({elements: graphElements});
             cyRef.current.layout(layout).run();
         }
     }, [graphElements]);
@@ -59,14 +77,17 @@ export default function PathfindingGraph() {
         {
             selector: "node.start",
             style: {
-                "background-color": "#30c748"
+                "border-width": 4,
+                "border-color": "#30c748",     // green
+                "border-style": "solid",
             }
         },
         {
             selector: "node.target",
             style: {
-                "background-color": "#ef4444",
-                "shape": "diamond"
+                "border-width": 4,
+                "border-color": "#ef4444",     // red
+                "border-style": "solid",
             }
         },
 
@@ -106,7 +127,9 @@ export default function PathfindingGraph() {
     return (
         <div style={{width: "100%", height: "calc(100% - 70px)", margin: "auto"}}>
             <CytoscapeComponent
-                cy={(cy) => { cyRef.current = cy }}
+                cy={(cy) => {
+                    cyRef.current = cy
+                }}
                 elements={graphElements}
                 style={{width: "100%", height: "100%", border: "1px solid #4c4f69", background: "#eff1f588"}}
                 layout={layout}
@@ -114,4 +137,4 @@ export default function PathfindingGraph() {
             />
         </div>
     );
-}
+});
