@@ -10,14 +10,15 @@ export default forwardRef((props, ref) => {
     const [graphElements, setGraphElements] = useState([]);
 
     useImperativeHandle(ref, () => ({
-        randomise(numNodes) {
-            fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=${numNodes}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    setGraphElements(data);
-                });
+        async randomise(numNodes) {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/generate-graph?nodes=${numNodes}`);
+            const data = await response.json();
+            setGraphElements(data);
+
             const cy = cyRef.current;
             cy.nodes().removeClass("start target");
+
+            return data
         },
 
         setGraphStartNode(startNode) {
@@ -29,6 +30,27 @@ export default forwardRef((props, ref) => {
             const cy = cyRef.current;
             cy.nodes().removeClass("target");
             cy.getElementById(targetNode.toLowerCase()).addClass("target");
+        },
+
+        getGraphStartNode() {
+            for (let i = 0; i < graphElements.length; i++) {
+                const node = graphElements[i];
+                if (node.classes === "start") {
+                    return node.data.label
+                }
+            }
+
+            return "";
+        },
+        getGraphTargetNode() {
+            for (let i = 0; i < graphElements.length; i++) {
+                const node = graphElements[i];
+                if (node.classes === "target") {
+                    return node.data.label
+                }
+            }
+
+            return "";
         }
     }))
 
