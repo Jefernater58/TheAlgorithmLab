@@ -32,12 +32,12 @@ export default forwardRef((props, ref) => {
 
         setGraphStartNode(startNode) {
             const cy = cyRef.current;
-            cy.nodes().removeClass("start");
+            cy.nodes().removeClass("start path");
             cy.getElementById(startNode.toLowerCase()).addClass("start");
         },
         setGraphTargetNode(targetNode) {
             const cy = cyRef.current;
-            cy.nodes().removeClass("target");
+            cy.nodes().removeClass("target path");
             cy.getElementById(targetNode.toLowerCase()).addClass("target");
         }
     }))
