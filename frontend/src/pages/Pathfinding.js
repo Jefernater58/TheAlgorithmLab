@@ -28,7 +28,14 @@ export default function Pathfinding() {
                 },
                 body: JSON.stringify({elements})
             }).then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                if (data.target_reached) {
+                    for (let i = 0; i < data.nodes_in_path.length; i++) {
+                        let nodeId = data.nodes_in_path[i];
+                        setGraphPathNode(nodeId);
+                    }
+                }
+            });
     }
 
     function resetPage() {
@@ -58,6 +65,10 @@ export default function Pathfinding() {
     function setNodeCountBounds(e) {
         let value = e.target.value;
         setNodeCount(value);
+    }
+
+    function setGraphPathNode(nodeId) {
+        graphRef.current?.setGraphPathNode(nodeId);
     }
 
     function setGraphStart(event) {

@@ -16,13 +16,18 @@ export default forwardRef((props, ref) => {
             setGraphElements(data);
 
             const cy = cyRef.current;
-            cy.nodes().removeClass("start target");
+            cy.nodes().removeClass("start target path");
 
             return data
         },
 
         getElements() {
             return cyRef.current.elements().jsons();
+        },
+
+        setGraphPathNode(nodeId) {
+            const cy = cyRef.current;
+            cy.getElementById(nodeId.toLowerCase()).addClass("path");
         },
 
         setGraphStartNode(startNode) {
@@ -93,6 +98,12 @@ export default forwardRef((props, ref) => {
                 "border-width": 4,
                 "border-color": "#ef4444",     // red
                 "border-style": "solid",
+            }
+        },
+        {
+            selector: "node.path",
+            style: {
+                "background-color": "#bec9ff",
             }
         },
 
