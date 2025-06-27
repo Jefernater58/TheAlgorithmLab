@@ -21,6 +21,10 @@ export default forwardRef((props, ref) => {
             return data
         },
 
+        getElements() {
+            return cyRef.current.elements().jsons();
+        },
+
         setGraphStartNode(startNode) {
             const cy = cyRef.current;
             cy.nodes().removeClass("start");
@@ -30,27 +34,6 @@ export default forwardRef((props, ref) => {
             const cy = cyRef.current;
             cy.nodes().removeClass("target");
             cy.getElementById(targetNode.toLowerCase()).addClass("target");
-        },
-
-        getGraphStartNode() {
-            for (let i = 0; i < graphElements.length; i++) {
-                const node = graphElements[i];
-                if (node.classes === "start") {
-                    return node.data.label
-                }
-            }
-
-            return "";
-        },
-        getGraphTargetNode() {
-            for (let i = 0; i < graphElements.length; i++) {
-                const node = graphElements[i];
-                if (node.classes === "target") {
-                    return node.data.label
-                }
-            }
-
-            return "";
         }
     }))
 
@@ -119,20 +102,12 @@ export default forwardRef((props, ref) => {
                 "line-color": "#4c4f69",
                 "width": 1,
                 "curve-style": "bezier",
-                "target-arrow-shape": "triangle",
+                "target-arrow-shape": "none",
                 "target-arrow-color": "#94a3b8",
                 "font-size": "16px",
                 "text-rotation": "autorotate",
                 "text-margin-y": -14,
                 "color": "#374151"
-            }
-        },
-        {
-            selector: "edge.heavy",
-            style: {
-                "line-color": "#f97316",
-                "target-arrow-color": "#f97316",
-                "width": 4
             }
         },
 
@@ -142,7 +117,7 @@ export default forwardRef((props, ref) => {
         },
         {
             selector: "edge:selected",
-            style: {"width": 6}
+            style: {"width": 3}
         }
     ];
 
