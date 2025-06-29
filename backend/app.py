@@ -25,10 +25,10 @@ def run_pathfinder():
     if algorithm == "dijkstras":
         return dijkstras(nodes_json, edges_json)
 
-    return jsonify([])
-
 
 def dijkstras(nodes_json, edges_json):
+    steps = []
+
     unvisited_nodes = [{"id": n["data"]["id"], "previous_node": "", "distance_from_start": 0 if "start" in n["classes"] else math.inf, "target": "target" in n["classes"]} for n in nodes_json]
     visited_nodes = []
 
@@ -50,14 +50,26 @@ def dijkstras(nodes_json, edges_json):
             break
 
         neighbours_id = get_neighbours(current_node["id"], edges_json)
+        step = []
+        found = False
         for node in unvisited_nodes:
             if node["id"] in neighbours_id:
+                step.append(node["id"])
                 new_distance = current_node["distance_from_start"] + 1
                 if new_distance < node["distance_from_start"]:
                     node["distance_from_start"] = new_distance
                     node["previous_node"] = current_node["id"]
+                    if node["target"]:
+                        found = True
+                        break
 
-    nodes_in_path_id = []
+        if step:
+            steps.append(step)
+        if found:
+            target_node_id = current_node["id"]
+            break
+
+    nodes_in_path_id = [target_node_id]
     current_id = target_node_id
     done = False
     while not done:
@@ -70,7 +82,7 @@ def dijkstras(nodes_json, edges_json):
                 nodes_in_path_id.append(node["previous_node"])
                 current_id = node["previous_node"]
 
-    return jsonify({"target_reached": True, "nodes_in_path": nodes_in_path_id})
+    return jsonify({"target_reached": True, "nodes_in_path": nodes_in_path_id, "steps": steps})
 
 
 def get_neighbours(node_id, edges_json):

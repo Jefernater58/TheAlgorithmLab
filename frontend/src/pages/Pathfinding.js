@@ -8,12 +8,33 @@ import PathfindingGraph from "../components/PathfindingGraph"
 export default function Pathfinding() {
     const graphRef = useRef(null);
     const [inputs, setInputs] = useState({start: "A", target: "Z"});
+    const [playbackSpeed, setPlaybackSpeed] = useState("normal");
     const [nodeCount, setNodeCount] = useState("26");
     const [algorithm, setAlgorithm] = useState("dijkstras");
 
     const updateInput = (field, value) => {
         setInputs(prev => ({...prev, [field]: value}));
     };
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function playSteps(steps) {
+         let sleepTime = 750;
+         if (playbackSpeed === "normal") sleepTime = 250;
+         else if (playbackSpeed === "fast") sleepTime = 75;
+
+        for (let i = 0; i < steps.length; i++) {
+            for (let j = 0; j < steps[i].length; j++) {
+                graphRef.current?.setCurrentStep(steps[i][j]);
+            }
+            await sleep(sleepTime);
+            for (let j = 0; j < steps[i].length; j++) {
+                graphRef.current?.setPastStep(steps[i][j]);
+            }
+        }
+    }
 
     function playButtonPressed() {
         const elements = graphRef.current?.getElements();
@@ -30,10 +51,16 @@ export default function Pathfinding() {
             }).then(res => res.json())
             .then(data => {
                 if (data.target_reached) {
-                    for (let i = 0; i < data.nodes_in_path.length; i++) {
-                        let nodeId = data.nodes_in_path[i];
-                        setGraphPathNode(nodeId);
-                    }
+                    playSteps(data.steps).then(r => {
+                        for (let i = 0; i < data.nodes_in_path.length; i++) {
+                            let nodeId = data.nodes_in_path[i];
+                            setGraphPathNode(nodeId);
+                            graphRef.current?.setPathEdge(nodeId, data.nodes_in_path[i-1]);
+                            graphRef.current?.setPathEdge(nodeId, inputs.start.toLowerCase());
+                            graphRef.current?.setPathEdge(nodeId, inputs.target.toLowerCase());
+                        }
+                        graphRef.current?.setGraphTargetNode(inputs.target);
+                    });
                 }
             });
     }
@@ -121,7 +148,9 @@ export default function Pathfinding() {
                 }} type="text" className="Global-text-input" id="TargetNode"/>
                 <br/>
                 <label className="Global-input-label">replay_speed</label>
-                <select defaultValue="normal" className="Global-select" id="ReplaySpeed">
+                <select onChange={(e) => {
+                    setPlaybackSpeed(e.target.value)
+                }} value={playbackSpeed} className="Global-select" id="ReplaySpeed">
                     <option value="slow">Slow</option>
                     <option value="normal">Normal</option>
                     <option value="fast">Fast</option>

@@ -16,7 +16,7 @@ export default forwardRef((props, ref) => {
             setGraphElements(data);
 
             const cy = cyRef.current;
-            cy.nodes().removeClass("start target path");
+            cy.nodes().removeClass("start target path currentstep paststep");
 
             return data
         },
@@ -27,17 +27,47 @@ export default forwardRef((props, ref) => {
 
         setGraphPathNode(nodeId) {
             const cy = cyRef.current;
-            cy.getElementById(nodeId.toLowerCase()).addClass("path");
+            let element = cy.getElementById(nodeId.toLowerCase())
+            element.removeClass("start target path currentstep paststep");
+            element.addClass("path");
+            },
+
+        setPathEdge(node1, node2) {
+            const cy = cyRef.current;
+            const edge = cy.edges().filter(edge => {
+                const src = edge.data('source');
+                const tgt = edge.data('target');
+                return (
+                    (src === node1 && tgt === node2) ||
+                    (src === node2 && tgt === node1)
+                );
+            });
+            edge.removeClass("start target path currentstep paststep");
+            edge.addClass("currentstep");
+        },
+
+        setCurrentStep(nodeId) {
+            const cy = cyRef.current;
+            cy.getElementById(nodeId.toLowerCase()).removeClass("start target path currentstep paststep");
+            cy.getElementById(nodeId.toLowerCase()).addClass("currentstep");
+        },
+
+        setPastStep(nodeId) {
+            const cy = cyRef.current;
+            cy.getElementById(nodeId.toLowerCase()).removeClass("start target path currentstep paststep");
+            cy.getElementById(nodeId.toLowerCase()).addClass("paststep");
         },
 
         setGraphStartNode(startNode) {
             const cy = cyRef.current;
-            cy.nodes().removeClass("start path");
+            cy.nodes().removeClass("start");
+            cy.getElementById(startNode.toLowerCase()).removeClass("start target path currentstep paststep");
             cy.getElementById(startNode.toLowerCase()).addClass("start");
         },
         setGraphTargetNode(targetNode) {
             const cy = cyRef.current;
-            cy.nodes().removeClass("target path");
+            cy.nodes().removeClass("target");
+            cy.getElementById(targetNode.toLowerCase()).removeClass("start target path currentstep paststep");
             cy.getElementById(targetNode.toLowerCase()).addClass("target");
         }
     }))
@@ -93,6 +123,18 @@ export default forwardRef((props, ref) => {
             }
         },
         {
+            selector: "node.currentstep",
+            style: {
+                "background-color": "orange",
+            }
+        },
+        {
+            selector: "node.paststep",
+            style: {
+                "background-color": "#dce0e8",
+            }
+        },
+        {
             selector: "node.target",
             style: {
                 "border-width": 4,
@@ -119,6 +161,12 @@ export default forwardRef((props, ref) => {
                 "text-rotation": "autorotate",
                 "text-margin-y": -14,
                 "color": "#374151"
+            }
+        },
+        {
+            selector: "edge.currentstep",
+            style: {
+                "width": 4
             }
         },
 
