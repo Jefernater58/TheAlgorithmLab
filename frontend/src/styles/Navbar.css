@@ -36,6 +36,7 @@
 
 .Navbar-link.active {
     font-weight: bold;
+    color: #7287fd;
 }
 
 .Navbar-divider {
