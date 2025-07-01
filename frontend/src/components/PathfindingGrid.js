@@ -7,33 +7,32 @@ import Grid from "../components/Grid";
 export default function PathfindingGrid() {
     const [algorithm, setAlgorithm] = useState("dijkstras");
     const [playbackSpeed, setPlaybackSpeed] = useState("normal");
-    const [gridWidth, setGridWidth] = useState("20");
-    const [gridHeight, setGridHeight] = useState("20");
+    const [gridScale, setGridScale] = useState("20");
 
     function playButtonPressed() {
 
     }
 
-    useEffect(() => {
-        console.log(gridWidth);
-    }, [gridWidth]);
+    function resetGrid() {
+
+    }
 
     useEffect(() => {
-        console.log(gridHeight);
-    }, [gridHeight]);
+        console.log(gridScale);
+    }, [gridScale]);
 
     return <div className="Global-mainbody Pathfinding-mainbody">
         <div className="Pathfinding-options">
             <h2>Grid Options</h2>
-            <label className="Global-input-label">grid_width (min: 2, max: 50)</label>
-            <input onChange={(e) => {setGridWidth(e.target.value)}} type="number"
-                   max="50" min="2" className="Global-text-input" value={gridWidth}/>
+            <label className="Global-input-label">grid_scale (pixels per square)</label>
+            <input onChange={(e) => {setGridScale(e.target.value)}} type="number"
+                   className="Global-text-input" value={gridScale}/>
             <br/>
-            <label className="Global-input-label">grid_height (min: 2, max: 50)</label>
-            <input onChange={(e) => {setGridHeight(e.target.value)}} type="number"
-                   max="50" min="2" className="Global-text-input" value={gridHeight}/>
+            <button onClick={resetGrid} style={{float: "left"}} className="Global-button">
+                <Shuffle size="18" style={{marginRight: "4px"}}/> Update Grid
+            </button>
 
-            <br/><br/>
+            <br/><br/><br/>
             <h2>Pathfinding Options</h2>
             <label className="Global-input-label">algorithm</label>
             <select value={algorithm} onChange={(e) => {setAlgorithm(e.target.value)}} className="Global-select" id="Algorithm">
