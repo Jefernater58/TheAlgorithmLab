@@ -107,7 +107,7 @@ export default function PathfindingGraph() {
 
 
     return <div className="Global-container">
-        <div className="Global-mainbody">
+        <div className="Global-mainbody Pathfinding-mainbody">
             <div className="Pathfinding-options">
                 <h2>Graph Options</h2>
                 <label className="Global-input-label">num_nodes (min: 2, max: 50)</label>
@@ -119,7 +119,7 @@ export default function PathfindingGraph() {
                     Graph
                 </button>
                 <br/><br/><br/>
-                <h2>PathfindingGraph Options</h2>
+                <h2>Pathfinding Options</h2>
                 <label className="Global-input-label">algorithm</label>
                 <select value={algorithm} onChange={(e) => {
                     setAlgorithm(e.target.value)
@@ -162,8 +162,7 @@ export default function PathfindingGraph() {
                 </button>
             </div>
             <div className="Pathfinding-graph">
-                <h2>Graph</h2>
-                <Graph ref={graphRef}/>
+                <Graph className="Pathfinding-graphComponent" ref={graphRef}/>
             </div>
         </div>
     </div>;

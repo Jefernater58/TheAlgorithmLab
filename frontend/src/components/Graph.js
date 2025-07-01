@@ -181,7 +181,7 @@ export default forwardRef((props, ref) => {
     ];
 
     return (
-        <div style={{width: "100%", height: "calc(100% - 70px)", margin: "auto"}}>
+        <div style={{width: "100%", height: "100%", margin: "auto"}}>
             <CytoscapeComponent
                 cy={(cy) => {
                     cyRef.current = cy
