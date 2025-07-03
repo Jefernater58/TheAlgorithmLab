@@ -95,6 +95,7 @@ export default forwardRef((props, ref) => {
             cyRef.current.json({elements: graphElements});
             cyRef.current.layout(layout).run();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [graphElements]);
 
     const stylesheet = [

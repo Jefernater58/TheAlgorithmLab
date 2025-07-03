@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import "../styles/Pathfinding.css";
 import "../styles/Global.css";
 import {Play, Shuffle, Undo2} from "lucide-react";
