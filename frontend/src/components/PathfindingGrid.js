@@ -62,7 +62,7 @@ export default function PathfindingGrid() {
             </button>
         </div>
         <div className="Pathfinding-graph">
-            <Grid/>
+            <Grid scaleString={gridScale}/>
         </div>
     </div>;
 }

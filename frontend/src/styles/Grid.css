@@ -4,5 +4,10 @@
     background: #eff1f588;
     display: flex;
     border: 1px solid #4c4f69;
-    flex-direction: column;
+}
+
+.Grid-square {
+    border: 1px solid #4c4f69;
+    width: 30px;
+    height: 30px;
 }
