@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import "../styles/Pathfinding.css";
 import "../styles/Global.css";
 import {Play, Shuffle, Undo2} from "lucide-react";
@@ -17,16 +17,12 @@ export default function PathfindingGrid() {
 
     }
 
-    useEffect(() => {
-        console.log(gridScale);
-    }, [gridScale]);
-
     return <div className="Global-mainbody Pathfinding-mainbody">
         <div className="Pathfinding-options">
             <h2>Grid Options</h2>
-            <label className="Global-input-label">grid_scale (pixels per square)</label>
+            <label className="Global-input-label">grid_scale (min: 20, max: 100)</label>
             <input onChange={(e) => {setGridScale(e.target.value)}} type="number"
-                   className="Global-text-input" value={gridScale}/>
+                   className="Global-text-input" value={gridScale} min="20" max="100" />
             <br/>
             <button onClick={resetGrid} style={{float: "left"}} className="Global-button">
                 <Shuffle size="18" style={{marginRight: "4px"}}/> Update Grid
